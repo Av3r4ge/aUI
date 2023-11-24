@@ -67,6 +67,10 @@ function PANEL:SetValue(int)
 	end 
 end
 
+function PANEL:GetValue()
+	return self.textentry:GetValue()
+end
+
 function PANEL:PerformLayout(w, h)
 	self.increment:SetSize(h, h)
 	self.decrement:SetSize(h, h)
