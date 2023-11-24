@@ -6,6 +6,7 @@ concommand.Add("aui_elements", function()
 	menu:SetSize(scrw * 0.5, scrh * 0.5)
 	menu:MakePopup()
 	menu:Center()
+	menu:SetTitle("Element Menu")
 
 
 	local button = vgui.Create("aui_button", menu)
@@ -39,9 +40,10 @@ concommand.Add("aui_elements", function()
 	tentry:DockMargin(0,4,0,0)
 	tentry:Dock(TOP)
 
-	local tentry = vgui.Create("aui_textentry", menu)
+	local tentry = vgui.Create("aui_numberentry", menu)
 	tentry:DockMargin(0,4,0,0)
 	tentry:Dock(TOP)
+	tentry:SetTall(40)
 end)
 
 

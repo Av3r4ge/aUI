@@ -18,7 +18,7 @@ function PANEL:Init()
 		self2:DrawTextEntryText( self2:GetTextColor(), self2:GetHighlightColor(), self2:GetCursorColor() )
 
 		if( not self2:IsEditing() and self2:GetText() == "" ) then
-			draw.SimpleText( self2.backText or "test", self2:GetFont(), 4, h/2, auiColor("TextInactive"), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
+			draw.SimpleText( self2.backText or "", self2:GetFont(), 4, h/2, auiColor("TextInactive"), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
 		end
 	end
 
@@ -59,6 +59,8 @@ function PANEL:Init()
 		self.clearbtn:SetVisible(false)
 	end
 
+	self.btn_accent = auiColor("TextInactive")
+
     self:InvalidateLayout()
 
 end
@@ -70,12 +72,28 @@ end
 function PANEL:OnChange()
 end
 
+function PANEL:SetTextCol(col)
+	self.textentry:SetTextColor(col)
+end
+
+function PANEL:SetTextFont(font)
+	self.textentry:SetFont(font)
+end
+
+function PANEL:SetAccentCol(col)
+	self.btn_accent = col
+end
+
+function PANEL:SetPlaceholderText(text)
+	self.textentry.backText = text
+end
+
 function PANEL:Paint(w, h)
 
 	surface.SetDrawColor( auiColor("SecondaryField") )
 	surface.DrawRect(0,0,w,h)
 
-	surface.SetDrawColor( auiColor("TextInactive") )
+	surface.SetDrawColor( self.btn_accent )
 	surface.DrawRect(0, h - 1, w, 1)
 end
 

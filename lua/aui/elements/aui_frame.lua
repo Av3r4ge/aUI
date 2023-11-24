@@ -1,5 +1,7 @@
 local PANEL = {}
 
+AUI.Fonts.Register("aui_default_titlefont", 8, 4)
+
 function PANEL:Init()
 
 	self.header = vgui.Create("Panel", self)
@@ -20,10 +22,46 @@ function PANEL:Init()
  		self:Remove()
  	end
 
+ 	self.backcol = auiColor("MainBG")
+
+end
+
+function PANEL:SetBackgroundColor(col)
+	self.backcol = col
+end
+
+function PANEL:SetTitle(text)
+
+	self.headertitle = vgui.Create("DLabel", self.header)
+	self.headertitle:SetText(text)
+	self.headertitle:SetFont("aui_default_titlefont")
+	self.headertitle:SetTextColor( auiColor("Text") )
+
+	self.headertitle:Dock(FILL)
+
+	self:InvalidateLayout(true)
+
+end
+
+function PANEL:EnableBlur(bool)
+	self.enablebackblur = bool
+	self.starttime = SysTime()
+end
+
+function PANEL:PerformLayout(w,h)
+
+	if self.headertitle then
+		self.headertitle:DockMargin( self.close:GetTall() * 0.4,0,0,0 )
+	end
+
 end
 
 function PANEL:Paint(w,h)
-	surface.SetDrawColor( auiColor("SecondaryBG") )
+	if self.enablebackblur then 
+		Derma_DrawBackgroundBlur(self, self.starttime)
+	end
+
+	surface.SetDrawColor( self.backcol )
 	surface.DrawRect(0,0,w,h)
 end
 
