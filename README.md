@@ -1,2 +1,3 @@
-# aUI
-ui library for gmod
+# aUI - a gmod ui library
+
+
